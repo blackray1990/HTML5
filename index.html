@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>html5学习</title>
+		
+	</head>
+	<style>
+
+	</style>
+	
+	
+	<body>
+		<canvas id="haha" width="500" height="500" style="border:1px solid #000000;"></canvas>
+		<input type="button" onclick="drawRectLineAndCircle()" value="画矩形、线条、圆" />
+		<canvas id="linear" width="200" height="100" style="border: 1px solid #eaeaea;"></canvas>
+		<canvas id="radial" width="200" height="100" style="border: 1px solid #eaaaee;"></canvas>
+		<input type="button" onclick="drawGradient()" value="颜色渐变" />
+		<canvas id="imgc" width="400" height="300" style="border: 1px solid #aaeeff;"></canvas>
+		<img id="target-img" src="img/img_the_scream.jpg" style="display: none;" width="200px" />
+		<input type="button" onclick="dramImages()" value="画图像" />
+	</body>
+	<!--
+    	javascript需要写在body之后，否则找不到canvas元素
+    -->
+	<script language="JavaScript">
+		function drawRectLineAndCircle(){
+			var c=document.getElementById("haha");
+			var ctx=c.getContext("2d");	//获得元素上下文
+			//绘图
+			ctx.fillStyle="darkcyan";	//颜色
+			ctx.fillRect(10,0,100,75);	//闭合
+			
+			//划直线
+			ctx.moveTo(100,100);
+			ctx.lineTo(200,100);
+			ctx.lineTo(120,250);
+			//画圆 x,y,r,start,end
+			ctx.arc(120,250,50,Math.PI*0.5,Math.PI*2);
+			//文字
+			ctx.font="30px Arial";
+			ctx.fillText("LOVE小秦秦",100,200);
+			ctx.strokeText("就是LOVE小秦秦",200,300);
+			
+			ctx.stroke();
+		}
+		
+		function drawGradient(){
+			//渐变
+			var c1 = document.getElementById("linear");
+			var ctx1 = c1.getContext("2d");
+			//创建渐变对象
+			var grd = ctx1.createLinearGradient(0,20,50,0);	//分隔线角度、渐变强度
+			grd.addColorStop(0,"red");
+			grd.addColorStop(1,"black");
+			//填充对象
+			ctx1.fillStyle=grd;
+			ctx1.fillRect(10,20,150,40);	//填充的矩形框
+			
+			var c2 = document.getElementById("radial");
+			var ctx2 = c2.getContext("2d");
+			//创建渐变对象
+			var grd2 = ctx2.createRadialGradient(50,50,50,20,30,30);
+			grd2.addColorStop(0,"red");
+			grd2.addColorStop(1,"white");
+			//填充对象
+			ctx2.fillStyle=grd2;
+			ctx2.fillRect(0,0,200,100);	//填充的
+		}
+		function dramImages(){
+			var ci = document.getElementById("imgc")
+			var ctx = ci.getContext("2d");
+			
+			var img = document.getElementById("target-img");
+			
+			ctx.drawImage(img,10,0)
+		}
+	</script>
+</html>
