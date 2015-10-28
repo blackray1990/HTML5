@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>渐变</title>
+<script language="javascript" type="text/javascript">
+ window.onload=function(){
+    var mycan=document.getElementById("myCanvas");
+ var canxt=mycan.getContext("2d");
+ //在一个矩形中尝试做渐变
+   var mylinear=canxt.createLinearGradient(0,0, 150,50);// 创建一个线性渐变 
+   mylinear.addColorStop(0,"red");
+   mylinear.addColorStop(0.5,"yellow");
+   mylinear.addColorStop(1,"green");
+  // 把渐变对象赋值给fillstyle,理解(和填充颜色联系起来，这里不同的就是纯色用渐变对象取代了，我们还是在对canxt操作)，关键
+   canxt.fillStyle=mylinear;
+   //绘制矩形
+   canxt.fillRect(0,0,150,50);//必不可少
+   //为文字创建一个渐变
+   var linearText=canxt.createLinearGradient(300,50,600,50);
+   linearText.addColorStop(0,"yellow");
+   linearText.addColorStop(0.5,"grey");
+   linearText.addColorStop(1,"red");
+   canxt.fillStyle=linearText;
+   canxt.font="30px Arial";
+   canxt.textBaseline="top";//文字对齐方式，在canxt中，要看实际效果
+   canxt.fillText("Linear canxt!!",300,50);//参数表示文字x,y轴的位置
+// 对角线上的渐变
+      var fillColordiagonal = canxt.createLinearGradient(50,200, 100,450);
+  // 渐变颜色
+  fillColordiagonal.addColorStop(0.2,"red");
+  fillColordiagonal.addColorStop(0.4,"black");
+  fillColordiagonal.addColorStop(0.6,"green");
+  fillColordiagonal.addColorStop(0.75,"yellow");
+  // 把渐变对象赋值给fillstyle
+  canxt.fillStyle= fillColordiagonal;
+  // 绘制矩形
+  canxt.fillRect(50,225, 100,250);
+// 绘制径向渐变
+  fillColorRadial = canxt.createRadialGradient(450,300,0, 450,300,200);
+  //径向渐变——createradialGradient(x0,y0,r0,x1,y1,r1)——使用六个参数以一种圆形或是圆锥形的模式来组合两种或多种颜色。
+  //1. (x0,y0)： 圆锥的第一个圆的中心
+  //2. r0：第一个圆的半径 
+  //3. (x1,y1)：圆锥的第二个圆的中心
+  //4. r1：第二个圆的半径
+  fillColorRadial.addColorStop(0, "red");
+  fillColorRadial.addColorStop(0.2, "black");
+  fillColorRadial.addColorStop(0.4, "green");
+  fillColorRadial.addColorStop(0.7, "yellow");
+  canxt.fillStyle = fillColorRadial;
+  canxt.rect(300,200,500,400);
+  canxt.fill();
+
+ }
+</script>
+</head>
+
+<body>
+<p><canvas id="myCanvas" width="600" height="400"></canvas></p>
+</body>
+</html>

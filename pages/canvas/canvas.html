@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>html5学习</title>
+		
+	</head>
+	<style>
+		canvas{
+			border:1px solid #000000;
+		}
+	</style>
+	
+	
+	<body>
+		<canvas id="f_canvas" onclick="f_renderCanvas()" width="550" height="500"></canvas>
+	</body>
+	<!--
+    	javascript需要写在body之后，否则找不到canvas元素
+    -->
+	<script language="JavaScript">
+	
+		var c=document.getElementById("f_canvas");
+		var ctx=c.getContext("2d");	//获得元素上下文
+			
+		function f_renderCanvas(){
+			drawTree(100,0);
+			drawTree(200,10);
+			drawTree(250,30);
+			drawTree(150,50);
+			drawTree(210,100);
+			drawTree(20,10);
+			drawTree(290,160);
+
+			ctx.beginPath();	//需要这句 否则fillStyle会互相影响
+			ctx.moveTo(30,100);
+			//小道
+			//ctx.quadraticCurveTo(130,180,200,150);	//二次贝塞尔曲线
+			ctx.strokeStyle = "darkgray";
+			ctx.bezierCurveTo(170,190,190,20,400,200);	//三次贝塞尔曲线 控制点、控制点、终点坐标
+			ctx.moveTo(30,100);
+			ctx.lineTo(30,120);
+			ctx.bezierCurveTo(170,210,210,40,400,220);	//三次贝塞尔曲线
+			ctx.stroke();
+			//屋子
+			ctx.moveTo(450,100);
+			ctx.lineTo(400,150);
+			ctx.lineTo(420,150);
+			ctx.lineTo(420,220);
+			ctx.lineTo(480,220);
+			ctx.lineTo(480,150);
+			ctx.lineTo(500,150);
+			ctx.lineTo(450,100);
+			ctx.moveTo(450,130);
+			ctx.font="30px Arial";
+			ctx.fillStyle="darkgray";
+			ctx.fillText("田",435,150);
+			ctx.stroke();
+			//文字
+			var grd = ctx.createLinearGradient(0,300,450,300);
+			grd.addColorStop(0,"red");
+			grd.addColorStop(0.5,"yellow");
+			grd.addColorStop(1,"blue");
+			ctx.fillStyle = grd;
+			ctx.fillText("小帅帅的茅草屋~",20,400);
+		}
+		
+		//画树
+		function drawTree(sPos,ePos){
+			
+			ctx.beginPath();
+			//划直线
+			ctx.moveTo(sPos,ePos);
+			ctx.lineTo(sPos-40,ePos+50);
+			ctx.lineTo(sPos-10,ePos+30);
+			ctx.lineTo(sPos-45,ePos+70);
+			ctx.lineTo(sPos-10,ePos+50);
+			ctx.lineTo(sPos-50,ePos+85);
+			ctx.lineTo(sPos-10,ePos+75);
+			ctx.lineTo(sPos-10,ePos+140)
+			
+			ctx.moveTo(sPos,ePos);
+			ctx.lineTo(sPos+40,ePos+50);
+			ctx.lineTo(sPos+10,ePos+30);
+			ctx.lineTo(sPos+45,ePos+70);
+			ctx.lineTo(sPos+10,ePos+50);
+			ctx.lineTo(sPos+50,ePos+85);
+			ctx.lineTo(sPos+10,ePos+75);
+			ctx.lineTo(sPos+10,ePos+140)
+			ctx.lineTo(sPos-10,ePos+140);
+			
+			ctx.strokeStyle = "deeppink";
+			ctx.fillStyle = "green";
+			
+			ctx.stroke();	//画边框
+			ctx.fill();		//填充内部
+		}
+	</script>
+</html>
